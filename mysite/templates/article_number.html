@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    {% if art_num|divisibleby:"2" %}
+        <div style="padding: 20px; background-color: #689F38">Число четное!</div>
+    {% else %}
+        <div style="padding: 20px; background-color: #FF3D00">Число нечетное!</div>
+    {% endif %}
+</div>
+<div style="padding: 20px; background-color: #E0E0E0">
+    <a href="{% url 'base' %}">To the base page</a>
+</div>
+{% endblock %}

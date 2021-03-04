@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base</title>
+</head>
+<body>
+{% load custom_tag %}
+{% block content %}
+    {% random_num as art_num %}
+    {% random_slug as slug_text %}
+    <div align="center" style="padding: 50px; background-color: #E0E0E0">Base page!</div>
+    <div style="padding: 20px; background-color: #FF8A80">
+        <a href="{% url 'article' art_num %}">To the article with random number</a>
+    </div>
+    <div style="padding: 20px; background-color: #0097A7">
+        <a href="{% url 'slug_text' art_num slug_text %}">To the article with random slug</a>
+    </div>
+{% endblock %}
+
+</body>
+</html>

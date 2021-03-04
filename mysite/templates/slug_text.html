@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    {% if slug_text %}
+        {% include 'add.html' with text=slug_text %}
+    {% endif %}
+</div>
+<div style="padding: 20px; background-color: #E0E0E0">
+    <a href="{% url 'base' %}">To the base page</a>
+</div>
+{% endblock %}
