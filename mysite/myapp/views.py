@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from .forms import MyForm, AuthenticationForm
+from django.contrib.auth import login
 
 
 def base(request):
@@ -49,3 +51,35 @@ def number(request):
 
 def last_url(request):
     return HttpResponse('It working')
+
+
+def form_view(request):
+    if request.method == 'POST':
+        form = MyForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('okay')
+        return HttpResponseRedirect('fail')
+    else:
+        form = MyForm()
+
+    return render(request, 'form.html', {'form': form})
+
+
+def okay(request):
+    return render(request, 'okay.html')
+
+
+def fail(request):
+    return render(request, 'fail.html')
+
+
+def my_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
+        if form.is_valid():
+            login(request, form.user)
+            return HttpResponseRedirect('/')
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
