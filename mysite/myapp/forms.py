@@ -1,27 +1,33 @@
-from django.contrib.auth.models import AbstractUser
-from django.db import models
-from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate
 from django import forms
+from django.core.exceptions import ValidationError
+from .models import MyUser
 
 
-class MyUser(AbstractUser):
-    birth_date = models.DateField()
-    avatar = models.ImageField(blank=True, null=True)
-
-
-class AuthenticationForm(forms.Form):
-    username = forms.CharField(max_length=254)
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+class Login(forms.Form):
+    username = forms.CharField(label='Your MyUser name', max_length=150)
+    password = forms.CharField(label='Your password', widget=forms.PasswordInput())
 
     def clean(self):
         cleaned_data = super().clean()
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
-        self.user = authenticate(username=username, password=password)
-        if self.user is None:
-            raise forms.ValidationError('Не правильный логин/пароль')
+        if username and password:
+            self.user = authenticate(username=username, password=password)
+            if self.user is None:
+                self.add_error(None, 'Username or password incorrect')
 
+# class AuthenticationForm(forms.Form):
+#     username = forms.CharField(max_length=254)
+#     password = forms.CharField(label="Password", widget=forms.PasswordInput)
+#
+#     def clean(self):
+#         cleaned_data = super().clean()
+#         username = cleaned_data.get('username')
+#         password = cleaned_data.get('password')
+#         self.MyUser = authenticate(username=username, password=password)
+#         if self.MyUser is None:
+#             raise forms.ValidationError('Не правильный логин/пароль')
 
 
 class MyForm(forms.Form):

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import MyForm, AuthenticationForm
+from .forms import MyForm, Login
 from django.contrib.auth import login
 
 
@@ -73,13 +73,14 @@ def fail(request):
     return render(request, 'fail.html')
 
 
-def my_login(request):
+def login_views(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
+        form = Login(request.POST)
         if form.is_valid():
-            login(request, form.user)
+            login(request, form.MyUser)
             return HttpResponseRedirect('/')
     else:
-        form = AuthenticationForm()
+        # form = AuthenticationForm()
+        form = Login()
 
     return render(request, 'login.html', {'form': form})

@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'myapp.MyUser'
 
 # Application definition
 
@@ -72,6 +71,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'myapp.MyUser'
+
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
@@ -81,8 +82,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydb',
-        'USER': 'myuser',
+        'NAME': 'newdb',
+        'USER': 'newuser',
         'PASSWORD': 'mypass',
         'HOST': 'localhost',
         'PORT': '5432',

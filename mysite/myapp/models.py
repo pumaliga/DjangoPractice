@@ -1,5 +1,10 @@
 from django.db import models
 from datetime import timedelta, datetime
+from django.contrib.auth.models import AbstractUser
+
+
+class MyUser(AbstractUser):
+    pass
 
 
 class Author(models.Model):
